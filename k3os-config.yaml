@@ -1,3 +1,7 @@
 ssh_authorized_keys: 
-- "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAACEA6RA7VFlJjo3wtDLNUcY/nAmGoCsDwzQgs+pY4Coew9E="
-hostname: k3s-master
+- "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXZVsnVJeYUjX10zbFtfjUgAKS1WYqcEfAXFbOTMEumk4EJCRJ41FWbKU/tCc9/90ZOSxGqxBarmGy9Y0TnJzar9v/+VQ5Vzf751HreVOHGllq1rbQ3au96bI656JB7XtyxATfi6mGlrxwTHs5zK8VzGEH/eS/V5sO1gWiJ4T1N6KeSNfFds0JW8duyyp6PdOIFhM+f+v+0Vd4uOSAcagRyzjnYEHRhWMfBr4sduXzZRiKYBodGgvby83XvoYbfG8hnvkjyYK2ox/am9Sq+q3IwtPjphRwpvgllB4aL49F1OkxY7ikqt4TEgQM7FvjJ1j8WU1NzQlEA2FBJjqO04+fdrdU2rgOPmDQrzuk8Q+ukHHWiHlvOeeUDSPETQfxQUSgaEXHI5TC4ioNLfEMZNkpoo38Sz9aCvY2KwfF65N6pI/wlloIBt4zMiQN2y6An34fjSOmmt//QAW+UjtG7ZXieS+kU2plgBXUCjF1mjtDxZgJdivd62/mTORC6tEKFj0="
+
+k3os:
+  password: ".Etml-"
+  token: "K10f3eb6b848ba684d50b3141bfa5a1196fb38a92c58952d54f10fdb3aaa4d97521::server:bea335d58bfaa6193f4fc7f2bd093939"
+  server_url: "https://k3s-master.local:6443"
