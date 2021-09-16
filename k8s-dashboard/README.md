@@ -1,29 +1,12 @@
 # Procédure d'instalation de Kubernetes Dashboard
 
-## Instalation de kubernetes-dashboard v2.3.1
+## Instalation de kubernetes-dashboard
 
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
-```
-
-## Création d'un compte
-voire `dashboard.admin-user.yaml`
-
-## Rôles du compte
-voire `dashboard.admin-user-role.yaml`
-
-## Appliquer les config
-
-```shell
-kubectl apply -f dashboard.admin-user.yaml
-kubectl apply -f dashboard.admin-user-role.yaml
-```
+> Voire https://rancher.com/docs/k3s/latest/en/installation/kube-dashboard/
 
 ## Get du token d'authetification
 
 ```shell
-kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+sudo k3s kubectl -n kubernetes-dashboard describe secret admin-user-token | grep '^token'
 ```
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-
-[Source](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)
+Token de mon cluster: `eyJhbGciOiJSUzI1NiIsImtpZCI6InJlTWF1X1E1czNzZ3RVWVQtdGpZQXA1eGtRZWxPOU8yeEg5ZUVGZUlfTmsifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLTU5Y2t0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIwY2NkMTMzYi1kZjcyLTQ5ZWUtYjcyMS04ZWMzYjE3NmY1OGEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.BfKxy94Yq0ZweO0UCkRgmYeoJ7JECtNW6Ub2cMQnaUbISJzPCm8cElq5rLGijPcheTeW6O_U7XNdmqO5IDmj0aizlcVSE7NdMpvVo8rG0fx-snu2LsRZ48nd3O4HerFABEG2H6Qn7G61QHYRmxl9Vg2pPLeiKBXADQPecSN9trgKWGJrxNKZ7WnJrSphhW0BLSEW96Pwqq5I90QxtCinkQyDipPabgga4Ssq2JwXqCn0YvcDOsFqwntHIbUA3tAsKlZb9f1ubTKTu47msnsNJIzQYg-LMZ5BSeY1RDNvGwadjRS77nZFovGItHGv1H3orwpAPylklkLiI3_0kyCxyQ`
