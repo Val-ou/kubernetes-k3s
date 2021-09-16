@@ -19,6 +19,11 @@ spec:
         image: httpd
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: 200m
+          requests:
+            cpu: 150m
 ---
 
 kind: Service
@@ -35,3 +40,17 @@ spec:
       port: 80
       targetPort: 80
   type: NodePort
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-autoscaling
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-deployment
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 75
