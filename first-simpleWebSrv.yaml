@@ -1,7 +1,7 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: simple-web-server
+  name: web-deployment
   labels:
     app: httpd
 spec:
@@ -20,15 +20,18 @@ spec:
         ports:
         - containerPort: 80
 ---
+
 kind: Service
 apiVersion: v1
 metadata:
-  name: simple-web-server
+  name: web-service
 spec:
   selector:
     app: httpd
   ports:
     - name: http
       protocol: TCP
-      port: 8083
+      nodePort: 30080
+      port: 80
       targetPort: 80
+  type: NodePort
