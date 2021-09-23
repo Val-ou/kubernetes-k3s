@@ -21,9 +21,9 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            cpu: 200m
+            cpu: 50m
           requests:
-            cpu: 150m
+            cpu: 40m
 ---
 
 kind: Service
@@ -42,7 +42,21 @@ spec:
   type: NodePort
 
 ---
-apiVersion: autoscaling/v1
+---
+#apiVersion: autoscaling/v1
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: web-autoscaling
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    name: web-deployment
+#  minReplicas: 2
+#  maxReplicas: 25
+#  targetCPUUtilizationPercentage: 75
+
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-autoscaling
@@ -52,5 +66,18 @@ spec:
     kind: Deployment
     name: web-deployment
   minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 75
+  maxReplicas: 25
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 10
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      selectPolicy: Max
