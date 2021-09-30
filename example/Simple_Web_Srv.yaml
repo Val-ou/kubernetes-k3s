@@ -21,9 +21,17 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            cpu: 50m
+            cpu: 500m
           requests:
             cpu: 40m
+        volumeMounts: 
+        - name: nfsvolume
+          mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: nfsvolume
+        nfs:
+          server: 10.0.0.3
+          path: /var/nfs/www
 ---
 
 kind: Service
@@ -40,9 +48,8 @@ spec:
       port: 80
       targetPort: 80
   type: NodePort
+---
 
----
----
 #apiVersion: autoscaling/v1
 #kind: HorizontalPodAutoscaler
 #metadata:
@@ -66,10 +73,10 @@ spec:
     kind: Deployment
     name: web-deployment
   minReplicas: 1
-  maxReplicas: 25
+  maxReplicas: 50
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 60
+      stabilizationWindowSeconds: 30
       policies:
       - type: Percent
         value: 100
@@ -79,5 +86,7 @@ spec:
       policies:
       - type: Percent
         value: 100
-        periodSeconds: 15
+        periodSeconds: 5
       selectPolicy: Max
+---
+
