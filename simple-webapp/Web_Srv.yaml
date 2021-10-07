@@ -66,12 +66,12 @@ spec:
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: apache-autoscaling
+  name: httpd-autoscaling
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: apache-php
+    name: httpd-deployment
   minReplicas: 2
   maxReplicas: 50
   behavior:
