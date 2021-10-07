@@ -16,9 +16,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
 spec:
-  #volumeName: mysql-pv
+  #volumeName: mysql-iscsi-pv
+  storageClassName: mysql-iscsi-pv
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi
+      storage: 4Gi
+  
+  
