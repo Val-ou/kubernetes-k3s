@@ -25,15 +25,20 @@ spec:
           requests:
             cpu: 500m
         volumeMounts: 
-        - name: nfs-db
+        - name: sql-db
           mountPath: /var/lib/mysql
+          subPath: "mysql"
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
       volumes:
-      - name: nfs-db
-        persistentVolumeClaim:
-          claimName: mysql-pvc
+      - name: sql-db
+        iscsi:
+          targetPortal: 10.0.0.3
+          iqn: iqn.2003-01.org.linux-iscsi.debian.x8664:sn.dd15bcd23550
+          lun: 0
+          fsType: 'ext4'
+          readOnly: false
 ---
 
 kind: Service
