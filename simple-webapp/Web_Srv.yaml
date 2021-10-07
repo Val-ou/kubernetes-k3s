@@ -23,7 +23,7 @@ spec:
           limits:
             cpu: 500m
           requests:
-            cpu: 250m
+            cpu: 150m
         volumeMounts: 
         - name: nfs-www
           mountPath: /var/www/html
@@ -80,12 +80,12 @@ spec:
       policies:
       - type: Percent
         value: 100
-        periodSeconds: 15
+        periodSeconds: 5
     scaleUp:
-      stabilizationWindowSeconds: 10
+      stabilizationWindowSeconds: 30
       policies:
       - type: Percent
-        value: 100
+        value: 250
         periodSeconds: 5
       selectPolicy: Max
 ---
