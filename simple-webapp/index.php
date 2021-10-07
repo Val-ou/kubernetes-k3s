@@ -3,6 +3,11 @@ $connector = new PDO('mysql:host=mysql-service;dbname=k8s_demmo_app;charset=utf8
 $connector->query('UPDATE `visit` SET `count`=`count`+1 WHERE 1;');
 $req = $connector->query('SELECT * FROM `visit`;');
 $visit = $req->fetchALL(PDO::FETCH_ASSOC)[0];
+for ($i=0; $i < 100000; $i++) {
+    $x = sqrt($i);
+    $x = log($x);
+    $x = pow($x,sqrt($i));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
