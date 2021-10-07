@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            cpu: 750m
+            cpu: 500m
           requests:
             cpu: 250m
         volumeMounts: 
@@ -29,7 +29,6 @@ spec:
           mountPath: /var/www/html
       volumes:
       - name: nfs-www
-        persistentVolumeReclaimPolicy: Retain
         nfs:
           server: 10.0.0.3
           path: /var/nfs/www
