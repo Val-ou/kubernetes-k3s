@@ -22,8 +22,10 @@ spec:
         resources:
           limits:
             cpu: 500m
+            memory: 200Mi
           requests:
             cpu: 150m
+            memory: 100Mi
         volumeMounts: 
         - name: nfs-www
           mountPath: /var/www/html
@@ -73,7 +75,7 @@ spec:
     kind: Deployment
     name: httpd-deployment
   minReplicas: 2
-  maxReplicas: 50
+  maxReplicas: 16
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 30
