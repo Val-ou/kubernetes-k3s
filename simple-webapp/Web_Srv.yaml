@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: httpd
-        image: mchauvel/php-pdo-mysql:7.1-apache #php:7.4-apache
+        image: ghcr.io/valentinfischereduvaud/php:7.4-apache-bullseye-pdo_mysql #mchauvel/php-pdo-mysql:7.1-apache
         ports:
         - containerPort: 80
         resources:
