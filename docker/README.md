@@ -14,5 +14,12 @@ docker login ghcr.io -u valentinfischereduvaud
 ```
 Il faut ensuite coller la clef
 
-## Accès
+## Utilisation
 
+```shell
+docker image tag nginx:latest ghcr.io/valentinfischereduvaud/nginx:v1
+docker image push ghcr.io/valentinfischereduvaud/nginx:v1
+```
+
+## Source
+> https://blog.bitsrc.io/using-github-container-registry-in-practice-295677c6f65e
