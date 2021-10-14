@@ -17,8 +17,8 @@ Il faut ensuite coller la clef
 ## Utilisation
 
 ```shell
-docker image tag nginx:latest ghcr.io/valentinfischereduvaud/nginx:v1
-docker image push ghcr.io/valentinfischereduvaud/nginx:v1
+docker image tag nginx:latest ghcr.io/valentinfischereduvaud/nginx:tmp
+docker image push ghcr.io/valentinfischereduvaud/nginx:tmp
 ```
 
 ## Source
