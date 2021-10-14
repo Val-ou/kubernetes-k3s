@@ -14,6 +14,15 @@ spec:
       labels:
         app: httpd
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: NotIn
+                values:
+                - "true"
       containers:
       - name: httpd
         image: ghcr.io/valentinfischereduvaud/php:7.4-apache-bullseye-pdo_mysql #mchauvel/php-pdo-mysql:7.1-apache
