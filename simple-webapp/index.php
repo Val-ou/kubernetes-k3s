@@ -1,5 +1,5 @@
 <?php
-$connector = new PDO('mysql:host=mysql-service;dbname=k8s_demmo_app;charset=utf8', 'root', 'root');
+$connector = new PDO('mysql:host=mysql-service;dbname=k8s_demo_app;charset=utf8', 'root', 'root');
 $connector->query('UPDATE `visit` SET `count`=`count`+1 WHERE 1;');
 $req = $connector->query('SELECT * FROM `visit`;');
 $visit = $req->fetchALL(PDO::FETCH_ASSOC)[0];
