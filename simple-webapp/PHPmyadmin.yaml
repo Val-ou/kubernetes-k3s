@@ -14,25 +14,38 @@ spec:
       labels:
         app: phpmyadmin
     spec:
+      # Le conteneur est toujour sur le master
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: In
+                values:
+                - "true"
+      # Définition du conteneur PHPMyAdmin 
       containers:
-        - name: phpmyadmin
-          image: phpmyadmin
-          ports:
-            - containerPort: 80
-          resources:
-            limits:
-              cpu: 100m
-            requests:
-              cpu: 100m
-          env:
-            - name: PMA_HOST
-              value: mysql-service
-            - name: PMA_PORT
-              value: "3306"
-            - name: MYSQL_ROOT_PASSWORD
-              value: root
+      - name: phpmyadmin
+        image: phpmyadmin
+        ports:
+          - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: PMA_HOST
+            value: mysql-service
+          - name: PMA_PORT
+            value: "3306"
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
 ---
-
+# Service PHPMyAdmin
 kind: Service
 apiVersion: v1
 metadata:
