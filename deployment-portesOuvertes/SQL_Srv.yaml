@@ -37,22 +37,9 @@ spec:
           requests:
             cpu: 1500m
             memory: 1000Mi
-        volumeMounts: 
-        - name: sql-db
-          mountPath: /var/lib/mysql
-          subPath: "mysql"
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
-      # Stockage de la base de données dur un disque réseau
-      volumes:
-      - name: sql-db
-        iscsi:
-          targetPortal: 10.0.0.3
-          iqn: iqn.2003-01.org.linux-iscsi.debian.x8664:sn.dd15bcd23550
-          lun: 0
-          fsType: 'ext4'
-          readOnly: false
 ---
 # Service MySQL
 kind: Service
