@@ -1,0 +1,28 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: httpd-autoscaling
+spec:
+  # On vise les serveurs web
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: httpd-deployment
+  # Maximum et minimum de serveurs
+  minReplicas: 2
+  maxReplicas: 16
+  behavior:
+    # Politique de mise à l'échelle
+    scaleDown:
+      stabilizationWindowSeconds: 15
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 15
+      policies:
+      - type: Percent
+        value: 500
+        periodSeconds: 15
+      selectPolicy: Max

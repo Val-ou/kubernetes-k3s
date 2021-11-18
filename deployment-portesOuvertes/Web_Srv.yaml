@@ -1,0 +1,65 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: httpd-deployment
+  labels:
+    app: httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      # Le conteneur n'est jamais sur le master
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: NotIn
+                values:
+                - "true"
+      # Définition du conteneur serveur web
+      containers:
+      - name: httpd
+        image: ghcr.io/valentinfischereduvaud/php:7.4-apache-bullseye-pdo_mysql
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 200m
+            memory: 100Mi
+        volumeMounts: 
+        - name: nfs-www
+          mountPath: /var/www/html
+      # Stockage des sources page web
+      volumes:
+      - name: nfs-www
+        nfs:
+          server: 10.0.0.3
+          path: /var/nfs/www
+---
+# Service serveur web
+kind: Service
+apiVersion: v1
+metadata:
+  name: httpd-service
+spec:
+  selector:
+    app: httpd
+  ports:
+    - name: http
+      protocol: TCP
+      nodePort: 30080
+      port: 80
+      targetPort: 80
+  type: NodePort
+
