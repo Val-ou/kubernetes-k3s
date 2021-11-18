@@ -21,9 +21,9 @@ spec:
         - containerPort: 3306
         resources:
           limits:
-            cpu: 750m
+            cpu: 1500m
           requests:
-            cpu: 700m
+            cpu: 1500m
         volumeMounts: 
         - name: sql-db
           mountPath: /var/lib/mysql

@@ -21,9 +21,9 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              cpu: 250m
+              cpu: 100m
             requests:
-              cpu: 150m
+              cpu: 100m
           env:
             - name: PMA_HOST
               value: mysql-service

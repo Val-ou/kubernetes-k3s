@@ -25,7 +25,7 @@ spec:
                 - "true"
       containers:
       - name: httpd
-        image: ghcr.io/valentinfischereduvaud/php:7.4-apache-bullseye-pdo_mysql #mchauvel/php-pdo-mysql:7.1-apache
+        image: ghcr.io/valentinfischereduvaud/php:7.4-apache-bullseye-pdo_mysql
         ports:
         - containerPort: 80
         resources:
@@ -87,17 +87,17 @@ spec:
   maxReplicas: 16
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 30
+      stabilizationWindowSeconds: 15
       policies:
       - type: Percent
         value: 100
-        periodSeconds: 5
+        periodSeconds: 15
     scaleUp:
-      stabilizationWindowSeconds: 30
+      stabilizationWindowSeconds: 15
       policies:
       - type: Percent
-        value: 250
-        periodSeconds: 5
+        value: 500
+        periodSeconds: 15
       selectPolicy: Max
 ---
 
